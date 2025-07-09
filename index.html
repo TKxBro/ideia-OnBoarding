@@ -24,50 +24,43 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        /* Custom scrollbar for a cleaner look */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
         .step-item.completed {
-            background-color: #f0fdf4; /* green-50 */
-            border-left-color: #22c55e; /* green-500 */
+            background-color: #f0fdf4;
+            border-left-color: #22c55e;
         }
-        .step-item.completed .status-icon {
-            color: #22c55e; /* green-500 */
-        }
+        .step-item.completed .status-icon { color: #22c55e; }
         .step-item.completed .action-button,
         .step-item.completed .skip-button {
              opacity: 0.6;
              pointer-events: none;
         }
-        /* Styles for the floating bubble when minimized */
         .onboarding-bubble {
             transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
         }
-        .onboarding-bubble:hover {
-            transform: scale(1.05);
+        .onboarding-bubble:hover { transform: scale(1.05); }
+
+        .integration-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .integration-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
         }
     </style>
 </head>
 <body class="bg-slate-100 flex items-center justify-center min-h-screen p-4">
-    <!-- This div is a placeholder for the rest of your application -->
-    <div class="absolute inset-0 bg-dots-pattern -z-10">
+    <!-- Placeholder for the rest of your application -->
+    <div class="absolute inset-0 -z-10">
         <div class="p-8">
             <h1 class="text-4xl font-bold text-slate-700">O seu Dashboard Principal</h1>
             <p class="text-slate-500">Aqui ficaria o resto da sua aplicação de CRM...</p>
         </div>
     </div>
-
 
     <div id="root"></div>
 
@@ -76,38 +69,21 @@
         const e = React.createElement;
 
         // --- Icon Component ---
-        const Icon = ({ name, className }) => {
+        const Icon = ({ name, className, ...props }) => {
             const svgProps = {
-                xmlns: "http://www.w3.org/2000/svg",
-                width: "24",
-                height: "24",
-                viewBox: "0 0 24 24",
-                fill: "none",
-                stroke: "currentColor",
-                strokeWidth: "2",
-                strokeLinecap: "round",
-                strokeLinejoin: "round",
-                className: className
+                xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24",
+                fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round",
+                strokeLinejoin: "round", className: className, ...props
             };
-
             switch (name) {
                 case 'Rocket': return e('svg', svgProps, e('path', {d:"M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.3.05-3.18-.65-.87-2.2-.86-3.15.05Z"}), e('path', {d:"m12 15-3-3a9 9 0 0 1 3 3Z"}), e('path', {d:"M17.5 14.5c1.5-1.26 2-5 2-5s-3.74.5-5 2c-.71.84-.7 2.3-.05 3.18.65.87 2.2.86 3.15-.05Z"}), e('path', {d:"m21 21-1.5-1.5a9 9 0 0 1-1.5 1.5Z"}), e('path', {d:"M15 12 3 3l3 9 9-3Z"}), e('path', {d:"M9.5 2.5c1.5 1.26 2 5 2 5s-3.74-.5-5 2c-.71.84-.7 2.3-.05 3.18C7.1 13.55 8.65 13.56 9.6 12.6Z"}));
-                case 'Settings': return e('svg', svgProps, e('path', {d:"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 0 2l-.15.08a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1 0-2l-.15.08a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"}), e('circle', {cx:"12", cy:"12", r:"3"}));
+                case 'Settings': return e('svg', svgProps, e('path', {d:"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 0 2l-.15.08a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1 0-2l.15.08a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"}), e('circle', {cx:"12", cy:"12", r:"3"}));
                 case 'Mail': return e('svg', svgProps, e('rect', {width:"20", height:"16", x:"2", y:"4", rx:"2"}), e('path', {d:"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"}));
-                case 'CalendarDays': return e('svg', svgProps, e('rect', {width:"18", height:"18", x:"3", y:"4", rx:"2", ry:"2"}), e('line', {x1:"16", x2:"16", y1:"2", y2:"6"}), e('line', {x1:"8", x2:"8", y1:"2", y2:"6"}), e('line', {x1:"3", x2:"21", y1:"10", y2:"10"}), e('path', {d:"M8 14h.01"}), e('path', {d:"M12 14h.01"}), e('path', {d:"M16 14h.01"}), e('path', {d:"M8 18h.01"}), e('path', {d:"M12 18h.01"}), e('path', {d:"M16 18h.01"}));
                 case 'Users': return e('svg', svgProps, e('path', {d:"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"}), e('circle', {cx:"9", cy:"7", r:"4"}), e('path', {d:"M22 21v-2a4 4 0 0 0-3-3.87"}), e('path', {d:"M16 3.13a4 4 0 0 1 0 7.75"}));
-                case 'MousePointerSquare': return e('svg', svgProps, e('path', {d:"M3 3h18v18H3z"}), e('path', {d:"M14 14l-4.06-1.27a1 1 0 0 1-.58-1.59l1.27-4.06a1 1 0 0 1 1.59-.58l4.06 1.27a1 1 0 0 1 .58 1.59l-1.27 4.06a1 1 0 0 1-1.59.58z"}), e('path', {d:"m11.5 11.5 1 1"}));
-                case 'Filter': return e('svg', svgProps, e('polygon', {points:"22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"}));
-                case 'UserPlus': return e('svg', svgProps, e('path', {d:"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"}), e('circle', {cx:"9", cy:"7", r:"4"}), e('line', {x1:"19", x2:"19", y1:"8", y2:"14"}), e('line', {x1:"22", x2:"16", y1:"11", y2:"11"}));
-                case 'ListChecks': return e('svg', svgProps, e('path', {d:"m3 17 2 2 4-4"}), e('path', {d:"m3 7 2 2 4-4"}), e('path', {d:"M13 6h8"}), e('path', {d:"M13 12h8"}), e('path', {d:"M13 18h8"}));
                 case 'MessageSquare': return e('svg', svgProps, e('path', {d:"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"}));
-                case 'Phone': return e('svg', svgProps, e('path', {d:"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"}));
-                case 'Smartphone': return e('svg', svgProps, e('rect', {width:"14", height:"20", x:"5", y:"2", rx:"2", ry:"2"}), e('path', {d:"M12 18h.01"}));
-                case 'FileText': return e('svg', svgProps, e('path', {d:"M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"}), e('polyline', {points:"14 2 14 8 20 8"}), e('line', {x1:"16", x2:"8", y1:"13", y2:"13"}), e('line', {x1:"16", x2:"8", y1:"17", y2:"17"}), e('line', {x1:"10", x2:"8", y1:"9", y2:"9"}));
                 case 'Bot': return e('svg', svgProps, e('path', {d:"M12 8V4H8"}), e('rect', {width:"16", height:"12", x:"4", y:"8", rx:"2"}), e('path', {d:"M2 14h2"}), e('path', {d:"M20 14h2"}), e('path', {d:"M15 13v2"}), e('path', {d:"M9 13v2"}));
                 case 'Workflow': return e('svg', svgProps, e('rect', {width:"8", height:"8", x:"3", y:"3", rx:"2"}), e('path', {d:"M7 11v4a2 2 0 0 0 2 2h4"}), e('rect', {width:"8", height:"8", x:"13", y:"13", rx:"2"}));
                 case 'Cpu': return e('svg', svgProps, e('rect', {width:"16", height:"16", x:"4", y:"4", rx:"2"}), e('rect', {width:"6", height:"6", x:"9", y:"9", rx:"1"}), e('path', {d:"M15 2v2"}), e('path', {d:"M15 20v2"}), e('path', {d:"M9 2v2"}), e('path', {d:"M9 20v2"}), e('path', {d:"M2 9h2"}), e('path', {d:"M2 15h2"}), e('path', {d:"M20 9h2"}), e('path', {d:"M20 15h2"}));
-                case 'BarChart3': return e('svg', svgProps, e('path', {d:"M3 3v18h18"}), e('path', {d:"M18 17V9"}), e('path', {d:"M13 17V5"}), e('path', {d:"M8 17v-3"}));
                 case 'LayoutDashboard': return e('svg', svgProps, e('rect', {width:"7", height:"9", x:"3", y:"3", rx:"1"}), e('rect', {width:"7", height:"5", x:"14", y:"3", rx:"1"}), e('rect', {width:"7", height:"9", x:"14", y:"12", rx:"1"}), e('rect', {width:"7", height:"5", x:"3", y:"16", rx:"1"}));
                 case 'CheckCircle2': return e('svg', svgProps, e('path', {d:"M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"}), e('path', {d:"m9 12 2 2 4-4"}));
                 case 'BookOpen': return e('svg', svgProps, e('path', {d:"M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"}), e('path', {d:"M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"}));
@@ -115,68 +91,183 @@
                 case 'CheckCircle': return e('svg', svgProps, e('path', {d:"M22 11.08V12a10 10 0 1 1-5.93-9.14"}), e('polyline', {points:"22 4 12 14.01 9 11.01"}));
                 case 'Minus': return e('svg', svgProps, e('path', {d:"M5 12h14"}));
                 case 'X': return e('svg', svgProps, e('path', {d:"M18 6 6 18"}), e('path', {d:"m6 6 12 12"}));
+                case 'ArrowLeft': return e('svg', svgProps, e('path', {d:"m12 19-7-7 7-7"}), e('path', {d:"M19 12H5"}));
+                case 'Plug': return e('svg', svgProps, e('path', {d:"M12 22v-5"}), e('path', {d:"M9 8V2"}), e('path', {d:"M15 8V2"}), e('path', {d:"M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"}));
+                case 'Facebook': return e('svg', {...svgProps, viewBox: "0 0 24 24"}, e('path', {d: "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"}));
+                case 'Instagram': return e('svg', {...svgProps, viewBox: "0 0 24 24"}, e('rect', {x:"2", y:"2", width:"20", height:"20", rx:"5", ry:"5"}), e('path', {d: "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"}), e('line', {x1:"17.5", y1:"6.5", x2:"17.51", y2:"6.5"}));
+                case 'RDStation': return e('svg', {...svgProps, fill: 'currentColor', strokeWidth: 0}, e('path', {d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.13 15.93V7.96h2.25v7.97h-2.25zm5.05 0h-2.25l-2.2-3.93h-.03v3.93H9.19V7.96h2.25l2.2 3.93h.03V7.96h2.25v7.97z"}));
+                case 'Google': return e('svg', {...svgProps, viewBox: "0 0 24 24"}, e('path', {d: "M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"}), e('path', {d: "M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"}), e('path', {d: "M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"}), e('path', {d: "M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"}));
+                case 'Smartphone': return e('svg', svgProps, e('rect', {width:"14", height:"20", x:"5", y:"2", rx:"2", ry:"2"}), e('path', {d:"M12 18h.01"}));
                 default: return e('svg', svgProps, e('circle', {cx:"12", cy:"12", r:"10"}), e('path', {d:"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"}), e('path', {d:"M12 17h.01"}));
             }
         };
 
-        // --- Onboarding App Component ---
-        const App = () => {
-            const [completedSteps, setCompletedSteps] = useState(new Set());
-            const [activeCategory, setActiveCategory] = useState('primeirosPassos');
-            const [isMinimized, setIsMinimized] = useState(false);
-            const [showOnboarding, setShowOnboarding] = useState(true);
+        // --- Data for Integrations with dynamic fields ---
+        const availableIntegrations = [
+            { id: 'facebook', name: 'Facebook', description: 'Conecte sua página para receber mensagens.', icon: 'Facebook', color: 'bg-blue-600', fields: [] },
+            { id: 'instagram', name: 'Instagram', description: 'Receba mensagens do Direct no seu CRM.', icon: 'Instagram', color: 'bg-gradient-to-br from-purple-500 to-pink-500', fields: [] },
+            { id: 'rd-station', name: 'RD Station', description: 'Sincronize leads e eventos de marketing.', icon: 'RDStation', color: 'bg-blue-500', fields: [
+                { type: 'text', name: 'api_key', label: 'Chave API da RD Station', placeholder: 'cole sua chave aqui...' }
+            ]},
+            { id: 'google-contacts', name: 'Google Contacts', description: 'Importe e sincronize seus contatos.', icon: 'Google', color: 'bg-white', fields: [] },
+            { id: 'whatsapp', name: 'WhatsApp', description: 'Conecte via API para conversas.', icon: 'Smartphone', color: 'bg-emerald-500', fields: [
+                { type: 'radio', name: 'whatsapp_type', label: 'Tipo de Conexão', options: [
+                    { id: 'meta-api', label: 'WhatsApp Cloud API (Oficial)' },
+                    { id: 'web-api', label: 'WhatsApp Web (Não oficial)' }
+                ]}
+            ]},
+        ];
 
-            // --- Data for Onboarding Steps with Links ---
-            const onboardingData = {
-                primeirosPassos: {
-                    title: "Primeiros Passos",
-                    icon: "Rocket",
-                    description: "Configure os fundamentos da sua conta para começar a usar o CRM.",
-                    steps: [
-                        { id: 'configEmpresa', icon: 'Settings', title: 'Preencher Configurações da Empresa', description: 'Adicione as informações básicas da sua empresa, como nome, endereço e logo.', link: '/config/empresa' },
-                        { id: 'sincEmail', icon: 'Mail', title: 'Sincronizar E-mail', description: 'Conecte sua conta de e-mail para enviar e receber mensagens diretamente do CRM.', link: '/config/email' },
-                        { id: 'sincAgenda', icon: 'CalendarDays', title: 'Sincronizar Agenda', description: 'Integre seu calendário para gerenciar reuniões e atividades sem sair da plataforma.', link: '/config/agenda' },
-                        { id: 'addUsuarios', icon: 'Users', title: 'Convidar Novos Usuários', description: 'Adicione os membros da sua equipe para que possam colaborar com você. (Se for o caso)', link: '/config/usuarios' },
-                    ]
-                },
-                usoBasico: {
-                    title: "Uso Básico",
-                    icon: "MousePointerSquare",
-                    description: "Aprenda as funcionalidades essenciais para o dia a dia.",
-                    steps: [
-                        { id: 'criarFunil', icon: 'Filter', title: 'Criar ou Editar seu Funil de Vendas', description: 'Personalize as etapas do seu processo comercial para refletir sua operação.', link: '/app/funil' },
-                        { id: 'addProspects', icon: 'UserPlus', title: 'Adicionar Prospects e Importar Planilha', description: 'Comece a popular seu CRM com leads e clientes existentes.', link: '/app/prospects/importar' },
-                        { id: 'criarAtividades', icon: 'ListChecks', title: 'Criar Atividades e Tarefas', description: 'Organize seu dia e defina os próximos passos para cada negociação.', link: '/app/atividades' },
-                    ]
-                },
-                canais: {
-                    title: "Canais de Comunicação",
-                    icon: "MessageSquare",
-                    description: "Integre as ferramentas que você usa para falar com seus clientes.",
-                    steps: [
-                        { id: 'contratarTelefonia', icon: 'Phone', title: 'Contratação da Telefonia', description: 'Ative a integração de telefonia para fazer e receber chamadas pelo CRM.', link: '/integracoes/telefonia' },
-                        { id: 'integrarWhatsapp', icon: 'Smartphone', title: 'Integração com WhatsApp', description: 'Conecte o WhatsApp para centralizar as conversas com seus leads.', link: '/integracoes/whatsapp' },
-                        { id: 'criarTemplates', icon: 'FileText', title: 'Criar Templates de Mensagens', description: 'Agilize a comunicação criando modelos de e-mail, WhatsApp e LinkedIn.', link: '/app/templates' },
-                    ]
-                },
-                automacao: {
-                    title: "Automação e Análise",
-                    icon: "Bot",
-                    description: "Passe para o próximo nível com automação e relatórios.",
-                    steps: [
-                        { id: 'criarCadencia', icon: 'Workflow', title: 'Criar Cadência de Prospecção', description: 'Configure sequências de contato automáticas para engajar seus leads.', link: '/automacao/cadencias' },
-                        { id: 'configMaquinaLeads', icon: 'Cpu', title: 'Configurar Máquina de Leads', description: 'Defina seu ICP e integre com o Sales Navigator para gerar leads qualificados.', link: '/automacao/maquina-leads' },
-                        { id: 'analisarDados', icon: 'BarChart3', title: 'Analisar Relatórios', description: 'Acompanhe suas métricas e o desempenho da sua equipe através dos dashboards.', link: '/app/relatorios' },
-                    ]
+        // --- Integration Modal Component ---
+        const IntegrationModal = ({ integration, onClose, onInstall }) => {
+            const [formData, setFormData] = useState({});
+
+            useEffect(() => {
+                // Initialize form data when a new integration is selected
+                const initialData = {};
+                integration?.fields?.forEach(field => {
+                    if (field.type === 'radio') {
+                        initialData[field.name] = field.options[0]?.id || '';
+                    } else {
+                        initialData[field.name] = '';
+                    }
+                });
+                setFormData(initialData);
+            }, [integration]);
+
+            if (!integration) return null;
+
+            const handleInputChange = (e) => {
+                const { name, value } = e.target;
+                setFormData(prev => ({ ...prev, [name]: value }));
+            };
+
+            const renderField = (field) => {
+                switch (field.type) {
+                    case 'text':
+                        return e('div', { key: field.name, className: 'w-full text-left' },
+                            e('label', { className: 'block text-sm font-medium text-slate-700 mb-1' }, field.label),
+                            e('input', {
+                                type: 'text',
+                                name: field.name,
+                                value: formData[field.name] || '',
+                                onChange: handleInputChange,
+                                placeholder: field.placeholder,
+                                className: 'w-full border-slate-300 rounded-md shadow-sm focus:ring-slate-500 focus:border-slate-500'
+                            })
+                        );
+                    case 'radio':
+                        return e('div', { key: field.name, className: 'w-full text-left' },
+                            e('label', { className: 'block text-sm font-medium text-slate-700 mb-2' }, field.label),
+                            e('div', { className: 'space-y-2' },
+                                field.options.map(option => e('label', { key: option.id, className: 'flex items-center p-3 border rounded-md cursor-pointer hover:bg-slate-50' },
+                                    e('input', {
+                                        type: 'radio',
+                                        name: field.name,
+                                        value: option.id,
+                                        checked: formData[field.name] === option.id,
+                                        onChange: handleInputChange,
+                                        className: 'h-4 w-4 text-slate-600 border-slate-300 focus:ring-slate-500'
+                                    }),
+                                    e('span', { className: 'ml-3 text-sm text-slate-800' }, option.label)
+                                ))
+                            )
+                        );
+                    default:
+                        return null;
                 }
             };
             
-            // --- Handlers ---
-            const handleCompleteStep = (stepId) => {
-                const newCompletedSteps = new Set(completedSteps);
-                if (!newCompletedSteps.has(stepId)) {
-                    newCompletedSteps.add(stepId);
-                    setCompletedSteps(newCompletedSteps);
+            return e('div', { className: 'fixed inset-0 bg-black/50 flex items-center justify-center z-50', onClick: onClose },
+                e('div', { className: 'bg-white rounded-lg shadow-xl p-8 w-full max-w-md relative', onClick: e => e.stopPropagation() },
+                    e('button', { onClick: onClose, className: 'absolute top-4 right-4 p-2 text-slate-500 hover:bg-slate-100 rounded-full'}, e(Icon, {name: 'X', className: 'w-5 h-5'})),
+                    e('div', { className: 'flex flex-col items-center text-center' },
+                        e('div', { className: `w-16 h-16 rounded-lg flex items-center justify-center ${integration.color}` },
+                            e(Icon, { name: integration.icon, className: 'w-8 h-8 text-white', stroke: integration.icon === 'Google' ? '#4285F4' : 'currentColor' })
+                        ),
+                        e('h2', { className: 'text-2xl font-bold mt-4' }, integration.name),
+                        e('p', { className: 'text-slate-500 mt-2 mb-6' }, `Conecte sua conta ${integration.name} para autorizar a sincronização.`),
+                        
+                        integration.fields.length > 0 && e('div', { className: 'w-full space-y-4 mb-6' },
+                            integration.fields.map(renderField)
+                        ),
+                        
+                        e('button', {
+                            onClick: () => onInstall(integration.id, formData),
+                            className: 'w-full bg-slate-800 text-white font-semibold py-3 rounded-lg hover:bg-slate-700 transition-colors'
+                        }, `Conectar ${integration.name}`)
+                    )
+                )
+            );
+        };
+
+        // --- Integrations Page Component ---
+        const IntegrationsPage = ({ navigateTo, installedIntegrations, handleInstall }) => {
+            const [selectedIntegration, setSelectedIntegration] = useState(null);
+
+            const confirmInstallation = (integrationId, formData) => {
+                handleInstall(integrationId, formData);
+                setSelectedIntegration(null);
+            };
+
+            return e('div', { className: 'fixed inset-0 bg-white flex flex-col z-40' },
+                e(IntegrationModal, { integration: selectedIntegration, onClose: () => setSelectedIntegration(null), onInstall: confirmInstallation }),
+                e('header', { className: 'p-6 border-b flex items-center' },
+                    e('button', { onClick: () => navigateTo('onboarding'), className: 'p-2 text-slate-500 hover:bg-slate-100 rounded-full mr-4' }, e(Icon, { name: 'ArrowLeft', className: 'w-5 h-5' })),
+                    e('h1', { className: 'text-2xl font-bold text-slate-800' }, 'Loja de Integrações')
+                ),
+                e('main', { className: 'flex-1 p-8 overflow-y-auto custom-scrollbar' },
+                    e('div', { className: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6' },
+                        availableIntegrations.map(integration => {
+                            const isInstalled = installedIntegrations.has(integration.id);
+                            return e('div', { key: integration.id, className: 'integration-card bg-white border rounded-lg p-6 flex flex-col' },
+                                e('div', { className: 'flex items-center mb-4' },
+                                    e('div', { className: `w-12 h-12 rounded-lg flex items-center justify-center ${integration.color}` },
+                                        e(Icon, { name: integration.icon, className: 'w-6 h-6 text-white', stroke: integration.icon === 'Google' ? '#4285F4' : 'currentColor' })
+                                    ),
+                                    e('h3', { className: 'text-lg font-semibold ml-4' }, integration.name)
+                                ),
+                                e('p', { className: 'text-slate-500 text-sm flex-1 mb-6' }, integration.description),
+                                isInstalled ?
+                                    e('div', { className: 'flex items-center text-emerald-600 font-semibold text-sm' }, e(Icon, { name: 'CheckCircle', className: 'w-4 h-4 mr-2' }), 'Instalado') :
+                                    e('button', {
+                                        onClick: () => setSelectedIntegration(integration),
+                                        className: 'w-full text-center bg-slate-100 hover:bg-slate-200 font-semibold py-2 rounded-lg transition-colors text-slate-700'
+                                    }, 'Instalar')
+                            );
+                        })
+                    )
+                )
+            );
+        };
+        
+        // --- Onboarding Component ---
+        const OnboardingComponent = ({ navigateTo, completedSteps, handleCompleteStep }) => {
+            const [activeCategory, setActiveCategory] = useState('primeirosPassos');
+            const [isMinimized, setIsMinimized] = useState(false);
+            const [showOnboarding, setShowOnboarding] = useState(true);
+            
+            const onboardingData = {
+                primeirosPassos: {
+                    title: "Primeiros Passos", icon: "Rocket", description: "Configure os fundamentos da sua conta para começar a usar o CRM.",
+                    steps: [
+                        { id: 'configEmpresa', icon: 'Settings', title: 'Preencher Configurações da Empresa', description: 'Adicione as informações básicas da sua empresa.', link: '/config/empresa' },
+                        { id: 'sincEmail', icon: 'Mail', title: 'Sincronizar E-mail', description: 'Conecte sua conta de e-mail para enviar e receber mensagens.', link: '/config/email' },
+                        { id: 'addUsuarios', icon: 'Users', title: 'Convidar Novos Usuários', description: 'Adicione os membros da sua equipe para que possam colaborar.', link: '/config/usuarios' },
+                    ]
+                },
+                canais: {
+                    title: "Canais de Comunicação", icon: "MessageSquare", description: "Integre as ferramentas que você usa para falar com seus clientes.",
+                    steps: [
+                        { id: 'explorar-integracoes', icon: 'Plug', title: 'Explorar Integrações', description: 'Conecte WhatsApp, Facebook, Instagram, RD Station e mais.', action: () => navigateTo('integrations') },
+                    ]
+                },
+                 automacao: {
+                    title: "Automação e Análise", icon: "Bot", description: "Passe para o próximo nível com automação e relatórios.",
+                    steps: [
+                        { id: 'criarCadencia', icon: 'Workflow', title: 'Criar Cadência de Prospecção', description: 'Configure sequências de contato automáticas para engajar leads.', link: '/automacao/cadencias' },
+                        { id: 'configMaquinaLeads', icon: 'Cpu', title: 'Configurar Máquina de Leads', description: 'Defina seu ICP e integre com o Sales Navigator.', link: '/automacao/maquina-leads' },
+                    ]
                 }
             };
 
@@ -184,10 +275,7 @@
             const progress = useMemo(() => (allSteps.length === 0) ? 0 : (completedSteps.size / allSteps.length) * 100, [completedSteps, allSteps.length]);
             const currentCategoryData = onboardingData[activeCategory];
             
-            // --- Conditional Rendering Logic ---
-            if (!showOnboarding) {
-                return null; // The component is hidden completely
-            }
+            if (!showOnboarding) return null;
             
             if (isMinimized) {
                 return e('div', {
@@ -196,22 +284,8 @@
                     },
                     e('div', {className: 'relative w-10 h-10 flex items-center justify-center'},
                         e('svg', {className: 'absolute inset-0 w-full h-full', viewBox: '0 0 36 36'},
-                            e('path', {
-                                className: 'text-slate-700',
-                                d: 'M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831',
-                                fill: 'none',
-                                stroke: 'currentColor',
-                                strokeWidth: '3'
-                            }),
-                            e('path', {
-                                className: 'text-emerald-500',
-                                d: 'M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831',
-                                fill: 'none',
-                                stroke: 'currentColor',
-                                strokeWidth: '3',
-                                strokeDasharray: `${progress}, 100`,
-                                strokeLinecap: 'round'
-                            })
+                            e('path', { className: 'text-slate-700', d: 'M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831', fill: 'none', stroke: 'currentColor', strokeWidth: '3'}),
+                            e('path', { className: 'text-emerald-500', d: 'M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831', fill: 'none', stroke: 'currentColor', strokeWidth: '3', strokeDasharray: `${progress}, 100`, strokeLinecap: 'round'})
                         ),
                         e(Icon, { name: 'Rocket', className: 'w-5 h-5' })
                     ),
@@ -231,10 +305,7 @@
                                 const isActive = activeCategory === key;
                                 const isCategoryCompleted = category.steps.every(s => completedSteps.has(s.id));
                                 return e('button', { key: key, onClick: () => setActiveCategory(key), className: `flex items-center gap-3 p-3 rounded-lg text-left transition-colors duration-200 ${isActive ? 'bg-slate-700' : 'hover:bg-slate-700/50'}`},
-                                    e('div', {className: 'relative'}, 
-                                        e(Icon, { name: category.icon, className: 'w-5 h-5 text-slate-300'}),
-                                        isCategoryCompleted && e(Icon, {name: 'CheckCircle2', className: 'w-4 h-4 text-emerald-400 bg-slate-800 rounded-full absolute -bottom-1 -right-1'})
-                                    ),
+                                    e('div', {className: 'relative'}, e(Icon, { name: category.icon, className: 'w-5 h-5 text-slate-300'}), isCategoryCompleted && e(Icon, {name: 'CheckCircle2', className: 'w-4 h-4 text-emerald-400 bg-slate-800 rounded-full absolute -bottom-1 -right-1'})),
                                     e('span', {className: 'flex-1'}, category.title)
                                 );
                             })
@@ -246,36 +317,28 @@
                     ),
                     e('main', { className: 'w-full md:w-3/4 p-8 lg:p-12 overflow-y-auto custom-scrollbar relative' },
                         e('div', { className: 'absolute top-4 right-4 flex gap-2' },
-                            e('button', { 
-                                onClick: () => setIsMinimized(true),
-                                className: 'p-2 text-slate-500 hover:bg-slate-100 rounded-full'
-                            }, e(Icon, { name: 'Minus', className: 'w-5 h-5' })),
-                             e('button', { 
-                                onClick: () => setShowOnboarding(false),
-                                className: 'p-2 text-slate-500 hover:bg-slate-100 rounded-full'
-                            }, e(Icon, { name: 'X', className: 'w-5 h-5' }))
+                            e('button', { onClick: () => setIsMinimized(true), className: 'p-2 text-slate-500 hover:bg-slate-100 rounded-full'}, e(Icon, { name: 'Minus', className: 'w-5 h-5' })),
+                            e('button', { onClick: () => setShowOnboarding(false), className: 'p-2 text-slate-500 hover:bg-slate-100 rounded-full'}, e(Icon, { name: 'X', className: 'w-5 h-5' }))
                         ),
                         e('header', {className: 'mb-8'}, e('h2', { className: 'text-3xl font-bold text-slate-800' }, currentCategoryData.title), e('p', { className: 'text-slate-500 mt-1' }, currentCategoryData.description)),
                         e('div', { className: 'space-y-4' },
                             currentCategoryData.steps.map(step => {
                                 const isCompleted = completedSteps.has(step.id);
+                                const ActionComponent = step.link ? 'a' : 'button';
                                 return e('div', { key: step.id, className: `step-item flex flex-col md:flex-row items-center gap-6 p-6 bg-white border-l-4 transition-all duration-300 rounded-lg shadow-sm hover:shadow-md ${isCompleted ? 'completed border-emerald-500' : 'border-slate-300'}`},
                                     e('div', {className: 'status-icon text-slate-400 transition-colors duration-300'}, isCompleted ? e(Icon, {name: 'CheckCircle', className: 'w-8 h-8'}) : e(Icon, {name: step.icon, className: 'w-8 h-8'})),
                                     e('div', { className: 'flex-1 text-center md:text-left' }, e('h3', { className: 'text-lg font-semibold text-slate-800' }, step.title), e('p', { className: 'text-slate-600 text-sm' }, step.description)),
                                     e('div', { className: 'flex items-center gap-x-4 ml-auto' },
-                                        activeCategory === 'canais' && !isCompleted && e('button', {
-                                            onClick: () => handleCompleteStep(step.id),
-                                            className: 'skip-button text-sm font-semibold text-slate-500 hover:text-slate-800 transition-colors'
-                                        }, 'Não usar'),
                                         isCompleted ?
                                             e('span', { className: 'px-6 py-2 rounded-full font-semibold text-sm bg-emerald-500 text-white' }, 'Concluído') :
-                                            e('a', {
-                                                href: step.link,
-                                                onClick: (evt) => {
+                                            e(ActionComponent, {
+                                                href: step.link || null,
+                                                onClick: () => {
                                                     handleCompleteStep(step.id);
+                                                    if (step.action) step.action();
                                                 },
                                                 className: 'action-button whitespace-nowrap px-6 py-2 rounded-full font-semibold text-sm transition-all duration-300 bg-slate-800 text-white hover:bg-slate-700'
-                                            }, 'Configurar')
+                                            }, step.link ? 'Configurar' : 'Explorar')
                                     )
                                 );
                             })
@@ -285,8 +348,40 @@
             );
         };
         
+        // --- Main App Router ---
+        const App = () => {
+            const [currentView, setCurrentView] = useState('onboarding'); // 'onboarding' or 'integrations'
+            const [completedSteps, setCompletedSteps] = useState(new Set());
+            const [installedIntegrations, setInstalledIntegrations] = useState(new Set());
+
+            const navigateTo = (view) => setCurrentView(view);
+
+            const handleCompleteStep = (stepId) => {
+                const newCompletedSteps = new Set(completedSteps);
+                if (!newCompletedSteps.has(stepId)) {
+                    newCompletedSteps.add(stepId);
+                    setCompletedSteps(newCompletedSteps);
+                }
+            };
+            
+            const handleInstallIntegration = (integrationId, formData) => {
+                const newInstalled = new Set(installedIntegrations);
+                if (!newInstalled.has(integrationId)) {
+                    newInstalled.add(integrationId);
+                    setInstalledIntegrations(newInstalled);
+                }
+                // In a real app, you would send the integrationId and formData to your backend here.
+                console.log("Instalando:", integrationId, "com os dados:", formData);
+            };
+
+            if (currentView === 'integrations') {
+                return e(IntegrationsPage, { navigateTo, installedIntegrations, handleInstall: handleInstallIntegration });
+            }
+            
+            return e(OnboardingComponent, { navigateTo, completedSteps, handleCompleteStep });
+        };
+
         ReactDOM.render(e(App), document.getElementById('root'));
     </script>
 </body>
 </html>
-

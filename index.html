@@ -231,7 +231,8 @@
             if (!step) return null;
 
             return e('div', { className: 'fixed inset-0 bg-black/50 flex items-center justify-center z-50', onClick: onClose },
-                e('div', { className: 'bg-white rounded-lg shadow-xl w-full max-w-2xl relative', onClick: e => e.stopPropagation() },
+                // Changed max-w-2xl to max-w-4xl to make the modal wider
+                e('div', { className: 'bg-white rounded-lg shadow-xl w-full max-w-4xl relative', onClick: e => e.stopPropagation() },
                     e('button', { onClick: onClose, className: 'absolute top-4 right-4 p-2 text-slate-500 hover:bg-slate-100 rounded-full'}, e(Icon, {name: 'X', className: 'w-5 h-5'})),
                     e('div', { className: 'p-8' },
                         e('h2', { className: 'text-2xl font-bold text-slate-800' }, step.title),
